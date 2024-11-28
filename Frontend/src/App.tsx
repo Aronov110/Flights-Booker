@@ -44,7 +44,7 @@ export default function App() {
 
 
 	const fetchFlightsData = async () => {
-		setDisableSearch(false);
+		setDisableSearch(true);
 		const url = `${import.meta.env.VITE_URL_PATH}/${destination === "" && departure === "" ? "flights/" : "search/"}`;
 		const params: { [key: string]: string } = {};
 		if (departure !== "") {
@@ -60,7 +60,7 @@ export default function App() {
 			params: params,
 		});
 		setCardData(response.data);
-		setDisableSearch(true);
+		setDisableSearch(false);
 	};
 
 
@@ -77,7 +77,7 @@ export default function App() {
 				destination={destination}
 				handleDepartureChange={handleDepartureChange}
 				handleDestinationChange={handleDestinationChange}
-				disableSearch={false}
+				disableSearch={disableSearch}
 			/>
 			<Container
 				maxWidth="lg"
