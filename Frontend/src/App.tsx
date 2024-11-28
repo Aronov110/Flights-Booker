@@ -25,6 +25,8 @@ export default function App() {
 	const [cardData, setCardData] = useState<FlightCardProps[]>([]);
 	const [disableSearch, setDisableSearch] = useState<boolean>(false);
 
+	console.log(import.meta.env.VITE_URL_PATH);
+
 	const handleDepartureChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 	) => {
