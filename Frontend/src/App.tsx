@@ -38,7 +38,6 @@ export default function App() {
 	};
 
 	const fetchFlightsData = async () => {
-		setDisableSearch(true);
 		const url = `${import.meta.env.VITE_URL_PATH}/${destination === "" && departure === "" ? "flights/" : "search/"}`;
 		const params: { [key: string]: string } = {};
 		if (departure !== "") {
@@ -54,12 +53,20 @@ export default function App() {
 			params: params,
 		});
 		setCardData(response.data);
-		setDisableSearch(false);
 	};
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-		fetchFlightsData();
+		const timeout = setTimeout(() => {
+			setDisableSearch(true);
+			fetchFlightsData().finally(() => {
+				setDisableSearch(false);
+			});
+		}, 1000);
+
+		return () => {
+			clearTimeout(timeout);
+		};
 	}, [departure, destination]);
 
 	return (

@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
 
-    envDir: 'env',
+    envDir: './env',
     define: {
       'process.env': env
     }
