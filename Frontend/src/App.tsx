@@ -1,10 +1,5 @@
 import Container from "@mui/joy/Container";
-import {
-	Box,
-	CssBaseline,
-	Skeleton,
-	Typography,
-} from "@mui/material";
+import { Box, CssBaseline, Skeleton, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import axios from "axios";
 import type * as React from "react";
@@ -28,7 +23,7 @@ export default function App() {
 	const [departure, setDeparture] = useState<string>("");
 	const [destination, setDestination] = useState<string>("");
 	const [cardData, setCardData] = useState<FlightCardProps[]>([]);
-	const [disableSearch, setDisableSearch] = useState<boolean>(true);
+	const [disableSearch, setDisableSearch] = useState<boolean>(false);
 
 	const handleDepartureChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
@@ -42,14 +37,13 @@ export default function App() {
 		setDestination(event.target.value);
 	};
 
-
 	const fetchFlightsData = async () => {
 		setDisableSearch(true);
 		const url = `${import.meta.env.VITE_URL_PATH}/${destination === "" && departure === "" ? "flights/" : "search/"}`;
 		const params: { [key: string]: string } = {};
 		if (departure !== "") {
 			params.departure = departure;
-		}	
+		}
 		if (destination !== "") {
 			params.destination = destination;
 		}
@@ -63,10 +57,9 @@ export default function App() {
 		setDisableSearch(false);
 	};
 
-
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-			fetchFlightsData();
+		fetchFlightsData();
 	}, [departure, destination]);
 
 	return (
@@ -87,7 +80,7 @@ export default function App() {
 				<Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
 					<div>
 						<Typography variant="h1" gutterBottom>
-							Flights Booking
+							Flights Booker
 						</Typography>
 						<Typography>
 							Find flights and book your next trip with ease
@@ -95,9 +88,7 @@ export default function App() {
 					</div>
 					<Grid container spacing={2} columns={12}>
 						{disableSearch
-							? Array.isArray(cardData) &&
-								cardData.map((card) => <FlightCard {...card} key={card.id} />)
-							: Array.from(new Array(6)).map((_, index) => {
+							? Array.from(new Array(6)).map((_, index) => {
 									const uniqueKey = `skeleton-${index}-${Math.random()}`;
 									return (
 										<Grid size={{ xs: 12, sm: 4 }} key={uniqueKey}>
@@ -110,7 +101,9 @@ export default function App() {
 											<Skeleton width="80%" />
 										</Grid>
 									);
-								})}
+								})
+							: Array.isArray(cardData) &&
+								cardData.map((card) => <FlightCard {...card} key={card.id} />)}
 					</Grid>
 				</Box>
 			</Container>

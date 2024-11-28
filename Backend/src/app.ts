@@ -6,15 +6,13 @@ import { flightRoutes } from "./routes/flightRoutes.js";
 
 const app = express();
 
-const allowedOrigins = ["https://flights-booker.onrender.com"];
-
-const options: cors.CorsOptions = {
-	origin: allowedOrigins,
-};
-
 app.disable("x-powered-by");
 app.use(helmet());
-app.use(cors(options));
+app.use(
+	cors({
+		origin: true,
+	}),
+);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(flightRoutes);
