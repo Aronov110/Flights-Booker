@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   frontend:
-    build: ./Flights-Booking-Frontend-React
+    build: ./Frontend
     ports:
       - '80:80'
     depends_on:
       - backend
 
   backend:
-    build: ./Flights-Booking-Backend-Node.js
+    build: ./Backend
     ports:
       - '3000:3000'
     environment:

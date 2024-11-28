@@ -12,21 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_DB: mydatabase
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -45,8 +30,16 @@ jobs:
     - name: Build frontend
       run: npm run build
 
-    - name: Deploy to production
-      if: github.ref == 'refs/heads/main'
-      run: |
-        echo "Deploying to production server"
-        # Add your deployment commands here
+    - name: Install Render CLI
+      run: curl -fsSL https://render.com/static/cli/install.sh | bash
+
+    - name: Authenticate Render CLI
+      env:
+        RENDER_API_KEY: rnd_n7XCEOATjWXAYubIYXUzdshy8CWB
+      run: render login --api-key $RENDER_API_KEY
+
+    - name: Deploy Backend to Render
+      run: render deploy service srv-ct3mcmlumphs73dvkfb0
+
+    - name: Deploy Frontend to Render
+      run: render deploy service srv-ct3vd2m8ii6s73d9o9lg
