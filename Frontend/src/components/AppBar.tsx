@@ -43,7 +43,13 @@ export default function AppAppBar(props: AppAppBarProps) {
 			<Container>
 				<StyledToolbar variant="dense" disableGutters>
 					<Box
-						sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
+						sx={{
+							flexGrow: 1,
+							display: "flex",
+							alignItems: "center",
+							px: 0,
+							flexDirection: { xs: "column", sm: "row" },
+						}}
 					>
 						<TextField
 							id="departure"
@@ -59,7 +65,11 @@ export default function AppAppBar(props: AppAppBarProps) {
 									"aria-label": "Enter a departure",
 								},
 							}}
-							sx={{ width: "250px", marginRight: "10px" }}
+							sx={{
+								width: { xs: "100%", sm: "250px" },
+								marginRight: { xs: 0, sm: "10px" },
+								marginBottom: { xs: "10px", sm: 0 },
+							}}
 							value={props.departure}
 							onChange={props.handleDepartureChange}
 							disabled={props.disableSearch}
@@ -78,7 +88,9 @@ export default function AppAppBar(props: AppAppBarProps) {
 									"aria-label": "Enter a destination",
 								},
 							}}
-							sx={{ width: "250px" }}
+							sx={{
+								width: { xs: "100%", sm: "250px" },
+							}}
 							value={props.destination}
 							onChange={props.handleDestinationChange}
 							disabled={props.disableSearch}
