@@ -1,6 +1,9 @@
 import { appDataSource } from "./database/postgreSQL.js";
 import { Flight } from "./models/flightModel.js";
 
+/**
+ * Initial flight data to populate the database.
+ */
 const initialFlights = [
 	{
 		departure: "London",
@@ -164,24 +167,32 @@ const initialFlights = [
 	},
 ];
 
-async function initializeDatabase() {
-  await appDataSource.initialize();
-  const flightRepository = appDataSource.getRepository(Flight);
+/**
+ * Initializes the database with initial flight data if it is empty.
+ *
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
+async function initializeDatabase(): Promise<void> {
+	await appDataSource.initialize();
+	const flightRepository = appDataSource.getRepository(Flight);
 
-  const count = await flightRepository.count();
-  if (count === 0) {
-    for (const flightData of initialFlights) {
-      const flight = flightRepository.create(flightData);
-      await flightRepository.save(flight);
-    }
-    console.log('Database has been populated with initial flight data.');
-  } else {
-    console.log('Database already contains flight data.');
-  }
+	const count = await flightRepository.count();
+	if (count === 0) {
+		for (const flightData of initialFlights) {
+			const flight = flightRepository.create(flightData);
+			await flightRepository.save(flight);
+		}
+		console.log("Database has been populated with initial flight data.");
+	} else {
+		console.log("Database already contains flight data.");
+	}
 
-  await appDataSource.destroy();
+	await appDataSource.destroy();
 }
 
+/**
+ * Executes the database initialization process.
+ */
 initializeDatabase().catch((error) => {
-  console.error('Error initializing database:', error);
+	console.error("Error initializing database:", error);
 });

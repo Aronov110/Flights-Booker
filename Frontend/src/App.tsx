@@ -9,6 +9,9 @@ import FlightCard from "./components/FlightCard";
 import Footer from "./components/Footer";
 import AppTheme from "./theme/AppTheme";
 
+/**
+ * Interface representing the properties of a flight card.
+ */
 export interface FlightCardProps {
 	id: string;
 	departure: string;
@@ -19,7 +22,12 @@ export interface FlightCardProps {
 	booked: boolean;
 }
 
-export default function App() {
+/**
+ * Main application component.
+ *
+ * @returns {JSX.Element} The main application component.
+ */
+export default function App(): JSX.Element {
 	const [departure, setDeparture] = useState<string>("");
 	const [destination, setDestination] = useState<string>("");
 	const [cardData, setCardData] = useState<FlightCardProps[]>([]);
@@ -27,18 +35,31 @@ export default function App() {
 
 	console.log(import.meta.env.VITE_URL_PATH);
 
+	/**
+	 * Handles the change event for the departure input field.
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+	 */
 	const handleDepartureChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 	) => {
 		setDeparture(event.target.value);
 	};
 
+	/**
+	 * Handles the change event for the destination input field.
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+	 */
 	const handleDestinationChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 	) => {
 		setDestination(event.target.value);
 	};
 
+	/**
+	 * Fetches flight data from the server based on the departure and destination.
+	 */
 	const fetchFlightsData = async () => {
 		const url = `${import.meta.env.VITE_URL_PATH}/${destination === "" && departure === "" ? "flights/" : "search/"}`;
 		const params: { [key: string]: string } = {};

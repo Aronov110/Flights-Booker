@@ -6,6 +6,9 @@ import Toolbar from "@mui/material/Toolbar";
 import { alpha, styled } from "@mui/material/styles";
 import ColorModeIconDropdown from "../theme/ColorModeIconDropdown";
 
+/**
+ * Custom styled toolbar component.
+ */
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
@@ -20,6 +23,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 	padding: "8px 12px",
 }));
 
+/**
+ * Props for the AppAppBar component.
+ */
 interface AppAppBarProps {
 	departure: string;
 	handleDepartureChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -28,7 +34,13 @@ interface AppAppBarProps {
 	disableSearch: boolean;
 }
 
-export default function AppAppBar(props: AppAppBarProps) {
+/**
+ * AppBar component for the application.
+ *
+ * @param {AppAppBarProps} props - The props for the AppAppBar component.
+ * @returns {JSX.Element} The AppBar component.
+ */
+export default function AppAppBar(props: AppAppBarProps): JSX.Element {
 	return (
 		<AppBar
 			position="fixed"

@@ -4,19 +4,39 @@ import { Flight } from "../models/flightModel.js";
 import dotenv from "dotenv";
 import { DataSource, type QueryRunner, Table } from "typeorm";
 
+/**
+ * Type definition for the environment.
+ */
 export type Environment = "development" | "production" | "test";
 
+/**
+ * Retrieves the current environment.
+ *
+ * @returns {Environment} The current environment.
+ */
 export const getEnvironment = (): Environment => {
 	const env = process.env.NODE_ENV as Environment;
 	return env || "development";
 };
 
+/**
+ * Path to the environment-specific configuration file.
+ */
 const envFile = `.env.${getEnvironment()}`;
 
+/**
+ * Directory name of the current module.
+ */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Loads environment variables from the specified file.
+ */
 dotenv.config({ path: path.resolve(__dirname, "../../env/", envFile) });
 
+/**
+ * Data source configuration for the PostgreSQL database.
+ */
 export const appDataSource = new DataSource({
 	type: "postgres",
 	host: process.env.DATABASE_HOST,
@@ -31,11 +51,18 @@ export const appDataSource = new DataSource({
 	subscribers: ["src/subscriber/**/*.ts"],
 });
 
-async function checkAndCreateFlightsTable() {
+/**
+ * Checks if the flights table exists and creates it if it does not.
+ *
+ * @returns {Promise<void>} A promise that resolves when the operation is complete.
+ */
+async function checkAndCreateFlightsTable(): Promise<void> {
 	const queryRunner: QueryRunner = appDataSource.createQueryRunner();
 	await queryRunner.connect();
 
-	const tableExists = await queryRunner.hasTable((getEnvironment() === "test")? "flights-test" : "flights");
+	const tableExists = await queryRunner.hasTable(
+		getEnvironment() === "test" ? "flights-test" : "flights",
+	);
 
 	if (!tableExists) {
 		await queryRunner.createTable(
@@ -82,6 +109,9 @@ async function checkAndCreateFlightsTable() {
 	await queryRunner.release();
 }
 
+/**
+ * Initializes the data source and checks for the flights table.
+ */
 appDataSource
 	.initialize()
 	.then(async () => {

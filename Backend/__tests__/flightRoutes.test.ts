@@ -3,7 +3,13 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import app from "../src/app";
 import { appDataSource } from "../src/database/postgreSQL";
 
+/**
+ * Test suite for flight-related endpoints.
+ */
 describe("Flight Tester", async () => {
+	/**
+	 * Sample flight data used for testing.
+	 */
 	const flights = [
 		{
 			departure: "London",
@@ -167,25 +173,40 @@ describe("Flight Tester", async () => {
 		},
 	];
 
+	/**
+	 * Initializes the database connection before each test.
+	 */
 	beforeEach(async () => {
 		await appDataSource.initialize();
 	});
 
+	/**
+	 * Closes the database connection after each test.
+	 */
 	afterEach(async () => {
 		await appDataSource.destroy();
 	});
 
+	/**
+	 * Test case for retrieving all flights.
+	 */
 	it("GET /flights returns all flights", async () => {
 		const response = await request(app).get("/flights");
 		expect(response.status).toBe(200);
 		expect(Array.isArray(response.body)).toBe(true);
 	});
 
+	/**
+	 * Test case for creating a new flight.
+	 */
 	it("POST /flight creates new flight", async () => {
 		const response = await request(app).post("/flight").send(flights[0]);
 		expect(response.status).toBe(201);
 	});
 
+	/**
+	 * Test case for updating the booking status of a flight.
+	 */
 	it("PATCH /flight/:id updates flight booking status", async () => {
 		let response = await request(app).get("/flights");
 		const mockFlight = response.body[0];

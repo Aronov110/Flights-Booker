@@ -3,6 +3,11 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 
+/**
+ * Component to display copyright information.
+ *
+ * @returns {JSX.Element} The Copyright component.
+ */
 function Copyright() {
 	return (
 		<Typography variant="body2" sx={{ color: "text.secondary", mt: 1 }}>
@@ -13,6 +18,11 @@ function Copyright() {
 	);
 }
 
+/**
+ * Footer component for the application.
+ *
+ * @returns {JSX.Element} The Footer component.
+ */
 export default function Footer() {
 	return (
 		<React.Fragment>

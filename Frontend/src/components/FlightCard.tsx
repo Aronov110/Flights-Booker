@@ -9,6 +9,9 @@ import * as React from "react";
 import { useState } from "react";
 import type { FlightCardProps } from "../App";
 
+/**
+ * Custom styled Card component.
+ */
 const StyledCard = styled(Card)(({ theme }) => ({
 	display: "flex",
 	flexDirection: "column",
@@ -26,6 +29,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
 	},
 }));
 
+/**
+ * Custom styled CardContent component.
+ */
 const StyledCardContent = styled(CardContent)({
 	display: "flex",
 	flexDirection: "column",
@@ -37,6 +43,9 @@ const StyledCardContent = styled(CardContent)({
 	},
 });
 
+/**
+ * Custom styled Typography component.
+ */
 const StyledTypography = styled(Typography)({
 	display: "-webkit-box",
 	WebkitBoxOrient: "vertical",
@@ -45,6 +54,12 @@ const StyledTypography = styled(Typography)({
 	textOverflow: "ellipsis",
 });
 
+/**
+ * FlightCard component for displaying flight information.
+ *
+ * @param {FlightCardProps} props - The props for the FlightCard component.
+ * @returns {JSX.Element} The FlightCard component.
+ */
 export default function FlightCard(props: FlightCardProps) {
 	const [disableButton, setDisableButton] = useState<boolean>(false);
 	const [booked, setBooked] = useState<boolean>(props.booked);
@@ -52,6 +67,9 @@ export default function FlightCard(props: FlightCardProps) {
 		null,
 	);
 
+	/**
+	 * Handles the click event for booking a flight.
+	 */
 	const handleClick = async () => {
 		setDisableButton(true);
 		const url = `${import.meta.env.VITE_URL_PATH}/flight/${props.id}`;
@@ -66,10 +84,18 @@ export default function FlightCard(props: FlightCardProps) {
 		setDisableButton(false);
 	};
 
+	/**
+	 * Handles the focus event for the card.
+	 *
+	 * @param {number} index - The index of the focused card.
+	 */
 	const handleFocus = (index: number) => {
 		setFocusedCardIndex(index);
 	};
 
+	/**
+	 * Handles the blur event for the card.
+	 */
 	const handleBlur = () => {
 		setFocusedCardIndex(null);
 	};
