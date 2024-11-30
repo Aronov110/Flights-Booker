@@ -172,7 +172,7 @@ const initialFlights = [
  *
  * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
-async function initializeDatabase(): Promise<void> {
+async function initializeDatabase() {
 	await appDataSource.initialize();
 	const flightRepository = appDataSource.getRepository(Flight);
 
