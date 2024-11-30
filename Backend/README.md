@@ -10,31 +10,38 @@ The backend of the Flights Booker application is designed to manage flight-relat
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-  - [API Endpoints](#api-endpoints)
-Database Initialization
-Environment Variables
-Contributing
-License
-Features
-Create, update, retrieve, and delete flight records.
-Support for multiple environments (development, production, test).
-Secure HTTP headers using Helmet.
-Cross-Origin Resource Sharing (CORS) enabled.
-Logging of HTTP requests and errors.
-JSON payload parsing.
-Technologies Used
-Node.js
-Express
-TypeORM
-PostgreSQL
-Helmet
-CORS
-Morgan
-Nanoid
-Getting Started
-Prerequisites
+- [API Endpoints](#api-endpoints)
+- [Database Initialization](#database-initialization)
+- [Environment Variables](#environment-variables)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Create, update, retrieve, and delete flight records.
+- Support for multiple environments (development, production, test).
+- Secure HTTP headers using Helmet.
+- Cross-Origin Resource Sharing (CORS) enabled.
+- Logging of HTTP requests and errors.
+- JSON payload parsing.
+
+## Technologies Used
+- Node.js
+- Express
+- TypeORM
+- PostgreSQL
+- Helmet
+- CORS
+- Morgan
+- Nanoid
+
+## Getting Started
+
+### Prerequisites
+
 Node.js (version 14 or higher)
 PostgreSQL database
+
 ### Installation
 1. Clone the repository:
 ```sh
@@ -74,7 +81,7 @@ npm start
 
 ### Status Route
 
-GET /status - Check the status of the application.
+- `GET /status` - Check the status of the application.
 
 ## Database Initialization
 

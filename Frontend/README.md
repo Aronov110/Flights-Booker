@@ -4,16 +4,16 @@ The frontend of the Flights Booker application is designed to provide a user-fri
 
 ## Table of Contents
 
-- Features
+- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
-  - Prerequisites
-  - Installation
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
   - [Running the Application](#running-the-application)
-- Components
+- [Components](#components)
 - [Environment Variables](#environment-variables)
-- Contributing
-- License
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
@@ -41,8 +41,8 @@ The frontend of the Flights Booker application is designed to provide a user-fri
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/yourusername/flights-booker-frontend.git
-cd flights-booker-frontend
+git clone https://github.com/Aronov110/Flights-Booker
+cd Frontend
 ```
 
 2. Install the dependencies:
